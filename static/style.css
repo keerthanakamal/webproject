@@ -1,0 +1,289 @@
+/* General styles */
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background is now set dynamically by JS */
+}
+
+/* To Do List header styling */
+h1 {
+    color: #6c3483;
+    background: #ede7f6; /* soft pastel purple */
+    padding: 18px 40px;
+    border-radius: 18px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 16px rgba(156,39,176,0.10);
+    letter-spacing: 2px;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    font-size: 2.5em;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+}
+h1::before {
+    content: '';
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    background: url('https://cdn-icons-png.flaticon.com/512/3176/3176363.png') no-repeat center/contain;
+    margin-right: 18px;
+}
+
+/* Month name/title styling */
+.calendar-title {
+    background: #f3e5f5; /* lighter pastel purple */
+    color: #6c3483;
+    padding: 10px 28px;
+    border-radius: 12px;
+    font-size: 1.35em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px rgba(156,39,176,0.07);
+    margin: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Month navigation buttons */
+#prev-month, #next-month {
+    background: #e1bee7;
+    color: #6c3483;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(156,39,176,0.10);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+#prev-month:hover, #next-month:hover {
+    background: #d1c4e9;
+    color: #4a148c;
+    box-shadow: 0 4px 12px rgba(156,39,176,0.15);
+}
+
+/* Calendar grid */
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 70px);
+    grid-auto-rows: 70px;
+    gap: 2px;
+    background: #f3e5f5; /* soft pastel purple */
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: none;
+    min-width: unset;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Calendar day and header styles */
+.calendar-day,
+.calendar-header {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 0;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+}
+
+/* Calendar header style - single pastel shade for all weekday columns */
+.calendar-header {
+    font-weight: bold;
+    background: #e1bee7; /* pastel purple */
+    color: #6c3483;
+    border-bottom: 2px solid #b39ddb;
+    font-size: 1.15em;
+    letter-spacing: 1px;
+    cursor: default;
+}
+.calendar-header-col-0,
+.calendar-header-col-1,
+.calendar-header-col-2,
+.calendar-header-col-3,
+.calendar-header-col-4,
+.calendar-header-col-5,
+.calendar-header-col-6 {
+    background: #e1bee7 !important;
+    color: #6c3483 !important;
+}
+
+/* Calendar day styles */
+.calendar-day {
+    background: #fff;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.calendar-day:hover:not(.empty):not(.selected) {
+    background: #ede7f6;
+    color: #6c3483;
+    box-shadow: 0 2px 8px rgba(156,39,176,0.08);
+}
+
+/* Days with tasks - will be set by JS with .has-task */
+.calendar-day.has-task {
+    background: #f3e5f5;
+    color: #6c3483;
+    font-weight: bold;
+    border: 2px solid #a084ca;
+    box-shadow: 0 2px 8px rgba(156,39,176,0.13);
+}
+
+/* Selected day highlight */
+.calendar-day.selected {
+    background: #a084ca;
+    color: #fff;
+    border: 2px solid #6c3483;
+    box-shadow: 0 2px 12px rgba(156,39,176,0.18);
+}
+
+/* Empty day cells */
+.calendar-day.empty {
+    background: transparent;
+    border: none;
+    cursor: default;
+}
+
+/* Task form styling */
+.task-form {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 8px;
+}
+.task-form input[type="text"] {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #b2ebf2;
+    font-size: 1em;
+    background: #f5faff;
+}
+.task-form button {
+    background: linear-gradient(90deg, #00bcd4 60%, #00c6ff 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.task-form button:hover {
+    background: linear-gradient(90deg, #007bff 60%, #00c6ff 100%);
+}
+
+/* Task list styles */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 8px;
+    margin-bottom: 6px;
+    background: linear-gradient(90deg, #fffde7 60%, #fff9c4 100%);
+    color: #6d4c41;
+    font-size: 1.08em;
+    box-shadow: 0 1px 4px rgba(255,193,7,0.07);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+li button {
+    background: #ff7043;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-size: 0.95em;
+    margin-left: auto;
+    transition: background 0.2s;
+}
+li button:hover {
+    background: #d84315;
+}
+
+/* Sidebar popup for tasks */
+.task-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    height: 100%;
+    background: linear-gradient(120deg, #e0f7fa 60%, #fff 100%);
+    box-shadow: -2px 0 24px rgba(0,188,212,0.13);
+    z-index: 1001;
+    padding: 32px 24px 24px 24px;
+    transition: right 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-left: 3px solid #00bcd4;
+}
+.task-sidebar.open {
+    right: 0;
+}
+.close-sidebar {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: #888;
+    cursor: pointer;
+}
+.sidebar-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.2);
+    z-index: 1000;
+    display: none;
+}
+.sidebar-overlay.show {
+    display: block;
+}
+
+/* Sidebar icon */
+.task-sidebar::before {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 12px auto;
+    background: url('https://cdn-icons-png.flaticon.com/512/3176/3176363.png') no-repeat center/contain;
+    opacity: 0.7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .calendar {
+        grid-template-columns: repeat(7, 38px);
+        grid-auto-rows: 38px;
+    }
+    .task-sidebar {
+        width: 98vw;
+        padding: 18px 8px 8px 8px;
+    }
+    h1 {
+        font-size: 1.3em;
+        padding: 10px 8px;
+    }
+}
